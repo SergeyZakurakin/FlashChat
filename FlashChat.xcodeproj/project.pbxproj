@@ -9,21 +9,24 @@
 /* Begin PBXBuildFile section */
 		DC8DDFFB2C2C3CF400964211 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DDFFA2C2C3CF400964211 /* AppDelegate.swift */; };
 		DC8DDFFD2C2C3CF400964211 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DDFFC2C2C3CF400964211 /* SceneDelegate.swift */; };
-		DC8DDFFF2C2C3CF400964211 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DDFFE2C2C3CF400964211 /* ViewController.swift */; };
-		DC8DE0022C2C3CF400964211 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8DE0002C2C3CF400964211 /* Main.storyboard */; };
+		DC8DDFFF2C2C3CF400964211 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DDFFE2C2C3CF400964211 /* WelcomeViewController.swift */; };
 		DC8DE0042C2C3CF700964211 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC8DE0032C2C3CF700964211 /* Assets.xcassets */; };
 		DC8DE0072C2C3CF700964211 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8DE0052C2C3CF700964211 /* LaunchScreen.storyboard */; };
+		DC8DE0142C2C4D6000964211 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DE0132C2C4D6000964211 /* Constants.swift */; };
+		DC8DE0172C2C57D000964211 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC8DE0162C2C57D000964211 /* SnapKit */; };
+		DC8DE0192C2C640000964211 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DE0182C2C640000964211 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DC8DDFF72C2C3CF400964211 /* FlashChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC8DDFFA2C2C3CF400964211 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC8DDFFC2C2C3CF400964211 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DC8DDFFE2C2C3CF400964211 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DC8DE0012C2C3CF400964211 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DC8DDFFE2C2C3CF400964211 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		DC8DE0032C2C3CF700964211 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC8DE0062C2C3CF700964211 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC8DE0082C2C3CF700964211 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC8DE0132C2C4D6000964211 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DC8DE0182C2C640000964211 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC8DE0172C2C57D000964211 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +60,56 @@
 		DC8DDFF92C2C3CF400964211 /* FlashChat */ = {
 			isa = PBXGroup;
 			children = (
-				DC8DDFFA2C2C3CF400964211 /* AppDelegate.swift */,
-				DC8DDFFC2C2C3CF400964211 /* SceneDelegate.swift */,
-				DC8DDFFE2C2C3CF400964211 /* ViewController.swift */,
-				DC8DE0002C2C3CF400964211 /* Main.storyboard */,
-				DC8DE0032C2C3CF700964211 /* Assets.xcassets */,
-				DC8DE0052C2C3CF700964211 /* LaunchScreen.storyboard */,
-				DC8DE0082C2C3CF700964211 /* Info.plist */,
+				DC8DE00E2C2C3E6D00964211 /* Application */,
+				DC8DE00F2C2C3E7C00964211 /* Controller */,
+				DC8DE0102C2C3EA100964211 /* View */,
+				DC8DE0112C2C3F0A00964211 /* SuportingFiles */,
+				DC8DE0132C2C4D6000964211 /* Constants.swift */,
 			);
 			path = FlashChat;
+			sourceTree = "<group>";
+		};
+		DC8DE00E2C2C3E6D00964211 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				DC8DDFFA2C2C3CF400964211 /* AppDelegate.swift */,
+				DC8DDFFC2C2C3CF400964211 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		DC8DE00F2C2C3E7C00964211 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DC8DDFFE2C2C3CF400964211 /* WelcomeViewController.swift */,
+				DC8DE0182C2C640000964211 /* RegisterViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DC8DE0102C2C3EA100964211 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DC8DE0052C2C3CF700964211 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DC8DE0112C2C3F0A00964211 /* SuportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				DC8DE0122C2C41AE00964211 /* Extensions */,
+				DC8DE0032C2C3CF700964211 /* Assets.xcassets */,
+				DC8DE0082C2C3CF700964211 /* Info.plist */,
+			);
+			path = SuportingFiles;
+			sourceTree = "<group>";
+		};
+		DC8DE0122C2C41AE00964211 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +128,9 @@
 			dependencies = (
 			);
 			name = FlashChat;
+			packageProductDependencies = (
+				DC8DE0162C2C57D000964211 /* SnapKit */,
+			);
 			productName = FlashChat;
 			productReference = DC8DDFF72C2C3CF400964211 /* FlashChat.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +159,9 @@
 				Base,
 			);
 			mainGroup = DC8DDFEE2C2C3CF400964211;
+			packageReferences = (
+				DC8DE0152C2C57D000964211 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = DC8DDFF82C2C3CF400964211 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +178,6 @@
 			files = (
 				DC8DE0072C2C3CF700964211 /* LaunchScreen.storyboard in Resources */,
 				DC8DE0042C2C3CF700964211 /* Assets.xcassets in Resources */,
-				DC8DE0022C2C3CF400964211 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +188,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC8DDFFF2C2C3CF400964211 /* ViewController.swift in Sources */,
+				DC8DDFFF2C2C3CF400964211 /* WelcomeViewController.swift in Sources */,
+				DC8DE0192C2C640000964211 /* RegisterViewController.swift in Sources */,
 				DC8DDFFB2C2C3CF400964211 /* AppDelegate.swift in Sources */,
 				DC8DDFFD2C2C3CF400964211 /* SceneDelegate.swift in Sources */,
+				DC8DE0142C2C4D6000964211 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DC8DE0002C2C3CF400964211 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DC8DE0012C2C3CF400964211 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DC8DE0052C2C3CF700964211 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -294,10 +338,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 77YH724CV2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FlashChat/Info.plist;
+				INFOPLIST_FILE = FlashChat/SuportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -325,10 +368,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 77YH724CV2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FlashChat/Info.plist;
+				INFOPLIST_FILE = FlashChat/SuportingFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -369,6 +411,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DC8DE0152C2C57D000964211 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DC8DE0162C2C57D000964211 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC8DE0152C2C57D000964211 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DC8DDFEF2C2C3CF400964211 /* Project object */;
 }
