@@ -35,9 +35,9 @@ private lazy var titleLabel: UILabel = {
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        animationText()
         setViews()
-        setConstraint()
-        
+        setConstraints()
     }
     
     //MARK: - Set Views
@@ -48,8 +48,6 @@ private lazy var titleLabel: UILabel = {
         view.addSubview(registerButton)
         view.addSubview(loginButton)
         
-        
-        titleLabel.text = Constants.appName
         registerButton.setTitle(Constants.registerName, for: .normal)
         loginButton.setTitle(Constants.logInName, for: .normal)
         
@@ -58,9 +56,29 @@ private lazy var titleLabel: UILabel = {
     }
     
     
+    private func animationText() {
+        titleLabel.text = ""
+        let titleText = Constants.appName
+        
+        for letter in titleText.enumerated() {
+            Timer.scheduledTimer(withTimeInterval: 0.1 * Double(letter.offset), repeats: false) { timer in
+                self.titleLabel.text! += String(letter.element)
+                
+            }
+        }
+        
+    }
+    
+    
     //MARK: - Private Methods
     @objc private func buttonsPressed(_ sender: UIButton) {
         let nextVC = RegisterViewController()
+        
+        if sender.currentTitle == Constants.registerName {
+            nextVC.autorizationType = .register
+        } else if sender.currentTitle == Constants.logInName {
+            nextVC.autorizationType = .login
+        }
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -71,7 +89,7 @@ private lazy var titleLabel: UILabel = {
 extension WelcomeViewController {
     
     // use SnapKit for Constraint
-    private func setConstraint() {
+    private func setConstraints() {
         
         titleLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
