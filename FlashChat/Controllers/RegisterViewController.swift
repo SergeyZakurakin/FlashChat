@@ -80,16 +80,19 @@ final class RegisterViewController: UIViewController {
         imageView.addSubview(passwordTextField)
         
         emailTextField.makeShadow()
+        
+        registerButton.addTarget(self, action: #selector(buttonsPressed), for: .touchUpInside)
     }
     
-  
     
-    
-    
-    
-//    @objc private func buttonsPressed(_ sender: UIButton) {
-//        
-//    }
+    @objc private func buttonsPressed(_ sender: UIButton) {
+        if sender.currentTitle == Constants.logInName {
+            let chatVC = ChatViewController()
+            navigationController?.pushViewController(chatVC, animated: true)
+        } else {
+            print("register")
+        }
+    }
 }
 
 
@@ -122,29 +125,6 @@ extension RegisterViewController {
         
     }
 }
-//MARK: - UIView
-extension UIView {
-    // shadow
-    func makeShadow() {
-        self.layer.shadowColor = UIColor.lightGray.cgColor
-        self.layer.shadowOpacity = 0.4
-        self.layer.shadowOffset = .init(width: 0, height: 10)
-        self.layer.shadowRadius = 10
-    }
-    
-}
 
-//MARK: - UITextField
-extension UITextField {
-    convenience init (placeholder: String, color: UIColor?) {
-        self.init()
-        
-        self.placeholder = placeholder
-        self.textAlignment = .center
-        self.textColor = color
-        self.backgroundColor = .white
-        self.layer.cornerRadius = 30
-        self.font = .systemFont(ofSize: 25)
-        self.tintColor = color
-    }
-}
+
+
