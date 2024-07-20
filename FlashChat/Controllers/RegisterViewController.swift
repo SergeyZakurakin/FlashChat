@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 enum Autorisation: String {
     case register = "Register"
@@ -25,23 +26,24 @@ final class RegisterViewController: UIViewController {
     }()
     
     let emailTextField = UITextField(
-        placeholder: Constants.emailName,
-        color: UIColor(named: Constants.BrandColors.blue)
+        placeholder: K.emailName,
+        color: UIColor(named: K.BrandColors.blue)
     )
     
     private lazy var imageView: UIImageView = {
         let element = UIImageView()
-        element.image = UIImage(named: Constants.textfieldImageName)
+        element.isUserInteractionEnabled = true
+        element.image = UIImage(named: K.textfieldImageName)
         
         return element
     }()
     
     private let passwordTextField = UITextField(
-        placeholder: Constants.passwordName,
+        placeholder: K.passwordName,
         color: .black
     )
     
-    let registerButton = UIButton(titleColor: UIColor(named: Constants.BrandColors.blue))
+    let registerButton = UIButton(titleColor: UIColor(named: K.BrandColors.blue))
     
     //MARK: - Public Properties
     
@@ -61,14 +63,14 @@ final class RegisterViewController: UIViewController {
         
         switch autorizationType {
         case .register:
-            view.backgroundColor = UIColor(named: Constants.BrandColors.lightBlue)
-            registerButton.setTitle(Constants.registerName, for: .normal)
+            view.backgroundColor = UIColor(named: K.BrandColors.lightBlue)
+            registerButton.setTitle(K.registerName, for: .normal)
         case .login:
-            view.backgroundColor = UIColor(named: Constants.BrandColors.blue)
-            registerButton.setTitle(Constants.logInName, for: .normal)
+            view.backgroundColor = UIColor(named: K.BrandColors.blue)
+            registerButton.setTitle(K.logInName, for: .normal)
             registerButton.setTitleColor(.white, for: .normal)
             
-            emailTextField.text = "1@1.com"
+            emailTextField.text = "1@2.com"
         default:
             break
         }
@@ -82,14 +84,50 @@ final class RegisterViewController: UIViewController {
         emailTextField.makeShadow()
         
         registerButton.addTarget(self, action: #selector(buttonsPressed), for: .touchUpInside)
+        
+        passwordTextField.isSecureTextEntry = true
     }
     
     
     @objc private func buttonsPressed(_ sender: UIButton) {
-        if sender.currentTitle == Constants.logInName {
-            let chatVC = ChatViewController()
-            navigationController?.pushViewController(chatVC, animated: true)
+        if sender.currentTitle == K.logInName {
+            
+            guard let email = emailTextField.text else {return}
+            guard let password = passwordTextField.text else {return}
+            
+            Auth.auth().signIn(
+                withEmail: email,
+                password: password
+            ) { authResult, error in
+                if let error {
+                    print(error)
+                    // create Alert
+                } else {
+                    
+                    let chatVC = ChatViewController()
+                    self.navigationController?.pushViewController(chatVC, animated: true)
+                }
+            }
+            
+            
         } else {
+            
+            guard let email = emailTextField.text else {return}
+            guard let password = passwordTextField.text else {return}
+            
+            //вынести отдельно
+            Auth.auth().createUser(
+                withEmail: email,
+                password: password
+            ) { authResult, error in
+                if let error {
+                    print(error.localizedDescription)
+                    // create Alert
+                }
+                
+                let chatVC = ChatViewController()
+                self.navigationController?.pushViewController(chatVC, animated: true)
+            }
             print("register")
         }
     }

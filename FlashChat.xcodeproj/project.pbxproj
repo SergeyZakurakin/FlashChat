@@ -12,7 +12,7 @@
 		DC8DDFFF2C2C3CF400964211 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DDFFE2C2C3CF400964211 /* WelcomeViewController.swift */; };
 		DC8DE0042C2C3CF700964211 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC8DE0032C2C3CF700964211 /* Assets.xcassets */; };
 		DC8DE0072C2C3CF700964211 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8DE0052C2C3CF700964211 /* LaunchScreen.storyboard */; };
-		DC8DE0142C2C4D6000964211 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DE0132C2C4D6000964211 /* Constants.swift */; };
+		DC8DE0142C2C4D6000964211 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DE0132C2C4D6000964211 /* K.swift */; };
 		DC8DE0172C2C57D000964211 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC8DE0162C2C57D000964211 /* SnapKit */; };
 		DC8DE0192C2C640000964211 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DE0182C2C640000964211 /* RegisterViewController.swift */; };
 		DC8DE01C2C2DDEAA00964211 /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DE01B2C2DDEAA00964211 /* UIButton + Extension.swift */; };
@@ -21,6 +21,8 @@
 		DC8DE0222C2DDFF000964211 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DE0212C2DDFF000964211 /* ChatViewController.swift */; };
 		DC8DE0242C2ED80A00964211 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DE0232C2ED80A00964211 /* Message.swift */; };
 		DC8DE0272C2EE6E800964211 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8DE0262C2EE6E800964211 /* MessageCell.swift */; };
+		DC9327B62C4AA25400AA7822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC9327B52C4AA25400AA7822 /* GoogleService-Info.plist */; };
+		DC9327CF2C4AB0BC00AA7822 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DC9327CE2C4AB0BC00AA7822 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +33,7 @@
 		DC8DE0032C2C3CF700964211 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC8DE0062C2C3CF700964211 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC8DE0082C2C3CF700964211 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DC8DE0132C2C4D6000964211 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DC8DE0132C2C4D6000964211 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		DC8DE0182C2C640000964211 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		DC8DE01B2C2DDEAA00964211 /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
 		DC8DE01D2C2DDEF400964211 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
@@ -39,6 +41,7 @@
 		DC8DE0212C2DDFF000964211 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		DC8DE0232C2ED80A00964211 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DC8DE0262C2EE6E800964211 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		DC9327B52C4AA25400AA7822 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +50,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC8DE0172C2C57D000964211 /* SnapKit in Frameworks */,
+				DC9327CF2C4AB0BC00AA7822 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +119,7 @@
 			children = (
 				DC8DE0032C2C3CF700964211 /* Assets.xcassets */,
 				DC8DE0082C2C3CF700964211 /* Info.plist */,
+				DC9327B52C4AA25400AA7822 /* GoogleService-Info.plist */,
 			);
 			path = SuportingFiles;
 			sourceTree = "<group>";
@@ -122,7 +127,7 @@
 		DC8DE01A2C2DDE0D00964211 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				DC8DE0132C2C4D6000964211 /* Constants.swift */,
+				DC8DE0132C2C4D6000964211 /* K.swift */,
 				DC8DE01B2C2DDEAA00964211 /* UIButton + Extension.swift */,
 				DC8DE01D2C2DDEF400964211 /* UIView + Extension.swift */,
 				DC8DE01F2C2DDF3200964211 /* UItextFiels + Extension.swift */,
@@ -156,6 +161,7 @@
 			name = FlashChat;
 			packageProductDependencies = (
 				DC8DE0162C2C57D000964211 /* SnapKit */,
+				DC9327CE2C4AB0BC00AA7822 /* FirebaseAuth */,
 			);
 			productName = FlashChat;
 			productReference = DC8DDFF72C2C3CF400964211 /* FlashChat.app */;
@@ -187,6 +193,7 @@
 			mainGroup = DC8DDFEE2C2C3CF400964211;
 			packageReferences = (
 				DC8DE0152C2C57D000964211 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DC9327CD2C4AB0BB00AA7822 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = DC8DDFF82C2C3CF400964211 /* Products */;
 			projectDirPath = "";
@@ -204,6 +211,7 @@
 			files = (
 				DC8DE0072C2C3CF700964211 /* LaunchScreen.storyboard in Resources */,
 				DC8DE0042C2C3CF700964211 /* Assets.xcassets in Resources */,
+				DC9327B62C4AA25400AA7822 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,7 +229,7 @@
 				DC8DE0222C2DDFF000964211 /* ChatViewController.swift in Sources */,
 				DC8DDFFD2C2C3CF400964211 /* SceneDelegate.swift in Sources */,
 				DC8DE01E2C2DDEF400964211 /* UIView + Extension.swift in Sources */,
-				DC8DE0142C2C4D6000964211 /* Constants.swift in Sources */,
+				DC8DE0142C2C4D6000964211 /* K.swift in Sources */,
 				DC8DE0202C2DDF3300964211 /* UItextFiels + Extension.swift in Sources */,
 				DC8DE01C2C2DDEAA00964211 /* UIButton + Extension.swift in Sources */,
 				DC8DE0242C2ED80A00964211 /* Message.swift in Sources */,
@@ -453,6 +461,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		DC9327CD2C4AB0BB00AA7822 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -460,6 +476,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DC8DE0152C2C57D000964211 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		DC9327CE2C4AB0BC00AA7822 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC9327CD2C4AB0BB00AA7822 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

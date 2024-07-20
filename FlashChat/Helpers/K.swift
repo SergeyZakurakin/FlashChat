@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Constants {
+struct K {
     static let appName = "⚡FlashChat"
     static let logInName = "Log In"
     static let registerName = "Register"

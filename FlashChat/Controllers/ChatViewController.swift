@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 class ChatViewController: UIViewController {
     
@@ -16,7 +17,7 @@ class ChatViewController: UIViewController {
     
     private lazy var containerView: UIView = {
         let element = UIView()
-        element.backgroundColor = UIColor(named: Constants.BrandColors.purple)
+        element.backgroundColor = UIColor(named: K.BrandColors.purple)
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -25,16 +26,16 @@ class ChatViewController: UIViewController {
         let element = UITextField()
         element.backgroundColor = .white
         element.borderStyle = .roundedRect
-        element.placeholder = Constants.enterMessagePlaceholder
-        element.textColor = UIColor(named: Constants.BrandColors.purple)
-        element.tintColor = UIColor(named: Constants.BrandColors.purple)
+        element.placeholder = K.enterMessagePlaceholder
+        element.textColor = UIColor(named: K.BrandColors.purple)
+        element.tintColor = UIColor(named: K.BrandColors.purple)
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
     private lazy var enterButton: UIButton = {
         let element = UIButton(type: .system)
-        element.setImage(UIImage(systemName: Constants.enterButtonImageName), for: .normal)
+        element.setImage(UIImage(systemName: K.enterButtonImageName), for: .normal)
         
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -42,7 +43,7 @@ class ChatViewController: UIViewController {
     
     //MARK: - Private Properties
     
-    private let messages = Message.getMessages()
+    private var messages = Message.getMessages()
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -53,6 +54,12 @@ class ChatViewController: UIViewController {
         setViews()
         setConstraints()
         setDelegates()
+        setupLogOutButton()
+    }
+    
+    private func setupLogOutButton() {
+        let logOutButton = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logOutButtonPressed))
+        navigationItem.rightBarButtonItem = logOutButton
     }
     
     
@@ -60,11 +67,14 @@ class ChatViewController: UIViewController {
     //MARK: - setup Views
     private func setViews() {
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
-        navigationController?.navigationBar.barTintColor = UIColor(named: Constants.BrandColors.blue)
+        tableView.register(MessageCell.self, forCellReuseIdentifier: K.cellIdentifier)
+        tableView.separatorStyle = .none
         
-        view.backgroundColor = UIColor(named: Constants.BrandColors.purple)
-        title = Constants.appName
+        navigationController?.navigationBar.barTintColor = UIColor(named: K.BrandColors.blue)
+        navigationItem.hidesBackButton = true
+        
+        view.backgroundColor = UIColor(named: K.BrandColors.purple)
+        title = K.appName
         
         view.addSubview(tableView)
         view.addSubview(containerView)
@@ -73,13 +83,38 @@ class ChatViewController: UIViewController {
         containerView.addSubview(enterButton)
 //        view.addSubview(messageTextField)
         
-        
+        enterButton.addTarget(self, action: #selector(enterButtonPressed), for: .touchUpInside)
         
     }
     
     private func setDelegates() {
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    
+
+    
+    //MARK: - Actions
+    @objc private func enterButtonPressed() {
+        if let text = messageTextField.text, !text.isEmpty{
+            messages.append(Message(sender: .me, body: text))
+            messageTextField.text = ""
+            tableView.reloadData()
+            let indexPath = IndexPath(row: messages.count - 1, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
+    }
+    
+    @objc private func logOutButtonPressed() {
+        print("Log Out")
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+            navigationController?.popToRootViewController(animated: true)
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
+        
     }
 }
 
@@ -91,10 +126,10 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as? MessageCell else { fatalError() }
         
         let model = messages[indexPath.row]
-        cell.textLabel?.text = model.body
+        cell.configure(with: model)
         
         return cell
     }
