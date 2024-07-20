@@ -24,6 +24,7 @@
 		DC9327B62C4AA25400AA7822 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC9327B52C4AA25400AA7822 /* GoogleService-Info.plist */; };
 		DC9327CF2C4AB0BC00AA7822 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DC9327CE2C4AB0BC00AA7822 /* FirebaseAuth */; };
 		DC9327D12C4BCCE100AA7822 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DC9327D02C4BCCE100AA7822 /* FirebaseFirestore */; };
+		DC9327E22C4C663800AA7822 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DC9327E12C4C663800AA7822 /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC8DE0172C2C57D000964211 /* SnapKit in Frameworks */,
+				DC9327E22C4C663800AA7822 /* IQKeyboardManagerSwift in Frameworks */,
 				DC9327CF2C4AB0BC00AA7822 /* FirebaseAuth in Frameworks */,
 				DC9327D12C4BCCE100AA7822 /* FirebaseFirestore in Frameworks */,
 			);
@@ -165,6 +167,7 @@
 				DC8DE0162C2C57D000964211 /* SnapKit */,
 				DC9327CE2C4AB0BC00AA7822 /* FirebaseAuth */,
 				DC9327D02C4BCCE100AA7822 /* FirebaseFirestore */,
+				DC9327E12C4C663800AA7822 /* IQKeyboardManagerSwift */,
 			);
 			productName = FlashChat;
 			productReference = DC8DDFF72C2C3CF400964211 /* FlashChat.app */;
@@ -197,6 +200,7 @@
 			packageReferences = (
 				DC8DE0152C2C57D000964211 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				DC9327CD2C4AB0BB00AA7822 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				DC9327E02C4C663800AA7822 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = DC8DDFF82C2C3CF400964211 /* Products */;
 			projectDirPath = "";
@@ -472,6 +476,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		DC9327E02C4C663800AA7822 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -489,6 +501,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DC9327CD2C4AB0BB00AA7822 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		DC9327E12C4C663800AA7822 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC9327E02C4C663800AA7822 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

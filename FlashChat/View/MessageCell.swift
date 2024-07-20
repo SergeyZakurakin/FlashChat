@@ -64,6 +64,7 @@ class MessageCell: UITableViewCell {
         messageView.frame = contentView.bounds
         
         messageView.layer.cornerRadius = (messageView.frame.height - 20) / 4
+        selectionStyle = .none
     }
     
     //MARK: - Init
