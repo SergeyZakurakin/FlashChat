@@ -1,22 +1,10 @@
-//
-//  ChatViewController.swift
-//  FlashChat
-//
-//  Created by Sergey Zakurakin on 27/06/2024.
-//
-
 import UIKit
 import SnapKit
 import FirebaseAuth
 import FirebaseFirestore
 
 class ChatViewController: UIViewController {
-    //MARK: - properties
-    
-    
-    
-    
-    //MARK: - UI
+    //MARK: - Properties
     
     private let tableView = UITableView()
     
@@ -41,27 +29,21 @@ class ChatViewController: UIViewController {
     private lazy var enterButton: UIButton = {
         let element = UIButton(type: .system)
         element.setImage(UIImage(systemName: K.enterButtonImageName), for: .normal)
-        
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
-    //MARK: - Private Properties
-    
     private var messages: [Message] = []
     let db = Firestore.firestore()
     
-    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .systemTeal
-        
         setViews()
         setConstraints()
         setDelegates()
         setupLogOutButton()
-        loadMassages()
+        loadMessages()
     }
     
     private func setupLogOutButton() {
@@ -69,11 +51,7 @@ class ChatViewController: UIViewController {
         navigationItem.rightBarButtonItem = logOutButton
     }
     
-    
-    
-    //MARK: - setup Views
     private func setViews() {
-        
         tableView.register(MessageCell.self, forCellReuseIdentifier: K.cellIdentifier)
         tableView.separatorStyle = .none
         
@@ -88,32 +66,29 @@ class ChatViewController: UIViewController {
         
         containerView.addSubview(messageTextField)
         containerView.addSubview(enterButton)
-//        view.addSubview(messageTextField)
         
         enterButton.addTarget(self, action: #selector(enterButtonPressed), for: .touchUpInside)
-        
-        
     }
     
-    private func loadMassages() {
-     
+    private func loadMessages() {
         db.collection(K.FStore.collectionName)
             .order(by: K.FStore.dateField)
             .addSnapshotListener { [weak self] querySnapshot, error in
-                guard let self else { return }
+                guard let self = self else { return }
                 self.messages = []
                 
-                if let error {
-                    print("There was an issue retrieving data from Firesstore. \(error)")
+                if let error = error {
+                    print("There was an issue retrieving data from Firestore. \(error)")
                 } else {
-                    guard let snaphotDocuments = querySnapshot?.documents else {return}
+                    guard let snapshotDocuments = querySnapshot?.documents else { return }
                     
-                    for doc in snaphotDocuments {
+                    for doc in snapshotDocuments {
                         let data = doc.data()
-                        guard let sender = data[K.FStore.senderField] as? String,
-                              let messageBody = data[K.FStore.senderField] as? String else {return}
+                        guard let senderEmail = data[K.FStore.senderField] as? String,
+                              let messageBody = data[K.FStore.bodyField] as? String else { return }
                         
-                        self.messages.append(Message(sender: sender, body: messageBody))
+                        let messageSender: Sender = senderEmail == Auth.auth().currentUser?.email ? .me : .you
+                        self.messages.append(Message(sender: messageSender, body: messageBody))
                         
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
@@ -130,41 +105,39 @@ class ChatViewController: UIViewController {
         tableView.delegate = self
     }
     
-
-    
-    //MARK: - Actions
     @objc private func enterButtonPressed() {
-        
         guard let messageBody = messageTextField.text,
-              let messageSender = Auth.auth().currentUser?.email else {return}
+              let messageSender = Auth.auth().currentUser?.email else { return }
         
-        db.collection(K.FStore.collectionName).addDocument(data: [K.FStore.senderField: messageSender, K.FStore.bodyField: messageBody]) { error in
-            if let error {
+        db.collection(K.FStore.collectionName).addDocument(data: [
+            K.FStore.senderField: messageSender,
+            K.FStore.bodyField: messageBody,
+            K.FStore.dateField: Date().timeIntervalSince1970
+        ]) { error in
+            if let error = error {
                 print(error.localizedDescription)
             } else {
                 print("Successfully saved data")
+                DispatchQueue.main.async {
+                    self.messageTextField.text = ""
+                }
             }
         }
-
-        
     }
     
     @objc private func logOutButtonPressed() {
-        print("Log Out")
         let firebaseAuth = Auth.auth()
         do {
-          try firebaseAuth.signOut()
+            try firebaseAuth.signOut()
             navigationController?.popToRootViewController(animated: true)
         } catch let signOutError as NSError {
-          print("Error signing out: %@", signOutError)
+            print("Error signing out: %@", signOutError)
         }
-        
     }
 }
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
@@ -173,19 +146,15 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as? MessageCell else { fatalError() }
         
         let model = messages[indexPath.row]
-        cell = mode
+        cell.configure(with: model)
         
         return cell
     }
-    
-    
 }
 
 //MARK: - Setup Constraints
 extension ChatViewController {
-    
     private func setConstraints() {
-        
         tableView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(containerView.snp.top)
@@ -206,5 +175,4 @@ extension ChatViewController {
             make.height.width.equalTo(40)
         }
     }
-    
 }

@@ -7,14 +7,13 @@
 
 import Foundation
 
+enum Sender {
+    case me
+    case you
+}
+
 struct Message {
-    
-    enum Sender {
-        case me
-        case you
-    }
-    
-    let sender: String
+    let sender: Sender
     let body: String
 }
 

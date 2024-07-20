@@ -12,7 +12,7 @@ class MessageCell: UITableViewCell {
     
     //MARK: - Elements
     
-    private lazy var mainStackView: UIStackView = {
+     lazy var mainStackView: UIStackView = {
         let element = UIStackView()
         element.axis = .horizontal
         element.spacing = 20
@@ -24,7 +24,7 @@ class MessageCell: UITableViewCell {
         return element
     }()
     
-    private lazy var leftImageView: UIImageView = {
+     lazy var leftImageView: UIImageView = {
         let element = UIImageView()
         element.image = UIImage(named: K.youAvatar)
         
@@ -32,7 +32,7 @@ class MessageCell: UITableViewCell {
         return element
     }()
     
-    private lazy var rightImageView: UIImageView = {
+     lazy var rightImageView: UIImageView = {
         let element = UIImageView()
         element.image = UIImage(named: K.meAvatar)
         
@@ -40,14 +40,14 @@ class MessageCell: UITableViewCell {
         return element
     }()
     
-    private lazy var messageView: UIView = {
+     lazy var messageView: UIView = {
         let element = UIView()
         
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
-    private lazy var messageLabel: UILabel = {
+     lazy var messageLabel: UILabel = {
         let element = UILabel()
         element.numberOfLines = 0
         
@@ -98,8 +98,6 @@ class MessageCell: UITableViewCell {
         
         
         messageLabel.text = model.body
-        default:
-            <#code#>
         }
     
     
