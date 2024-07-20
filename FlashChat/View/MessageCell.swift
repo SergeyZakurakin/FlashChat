@@ -9,6 +9,7 @@ import UIKit
 
 class MessageCell: UITableViewCell {
     
+    
     //MARK: - Elements
     
     private lazy var mainStackView: UIStackView = {
@@ -81,6 +82,7 @@ class MessageCell: UITableViewCell {
     //MARK: - Public Properties
     public func configure(with model: Message) {
         
+        
         switch model.sender {
         case .me:
             leftImageView.isHidden = true
@@ -96,7 +98,9 @@ class MessageCell: UITableViewCell {
         
         
         messageLabel.text = model.body
-    }
+        default:
+            <#code#>
+        }
     
     
     

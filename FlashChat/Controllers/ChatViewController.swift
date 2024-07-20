@@ -8,8 +8,13 @@
 import UIKit
 import SnapKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class ChatViewController: UIViewController {
+    //MARK: - properties
+    
+    
+    
     
     //MARK: - UI
     
@@ -43,7 +48,8 @@ class ChatViewController: UIViewController {
     
     //MARK: - Private Properties
     
-    private var messages = Message.getMessages()
+    private var messages: [Message] = []
+    let db = Firestore.firestore()
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
@@ -55,6 +61,7 @@ class ChatViewController: UIViewController {
         setConstraints()
         setDelegates()
         setupLogOutButton()
+        loadMassages()
     }
     
     private func setupLogOutButton() {
@@ -85,6 +92,37 @@ class ChatViewController: UIViewController {
         
         enterButton.addTarget(self, action: #selector(enterButtonPressed), for: .touchUpInside)
         
+        
+    }
+    
+    private func loadMassages() {
+     
+        db.collection(K.FStore.collectionName)
+            .order(by: K.FStore.dateField)
+            .addSnapshotListener { [weak self] querySnapshot, error in
+                guard let self else { return }
+                self.messages = []
+                
+                if let error {
+                    print("There was an issue retrieving data from Firesstore. \(error)")
+                } else {
+                    guard let snaphotDocuments = querySnapshot?.documents else {return}
+                    
+                    for doc in snaphotDocuments {
+                        let data = doc.data()
+                        guard let sender = data[K.FStore.senderField] as? String,
+                              let messageBody = data[K.FStore.senderField] as? String else {return}
+                        
+                        self.messages.append(Message(sender: sender, body: messageBody))
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                            let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                        }
+                    }
+                }
+            }
     }
     
     private func setDelegates() {
@@ -96,13 +134,19 @@ class ChatViewController: UIViewController {
     
     //MARK: - Actions
     @objc private func enterButtonPressed() {
-        if let text = messageTextField.text, !text.isEmpty{
-            messages.append(Message(sender: .me, body: text))
-            messageTextField.text = ""
-            tableView.reloadData()
-            let indexPath = IndexPath(row: messages.count - 1, section: 0)
-            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        
+        guard let messageBody = messageTextField.text,
+              let messageSender = Auth.auth().currentUser?.email else {return}
+        
+        db.collection(K.FStore.collectionName).addDocument(data: [K.FStore.senderField: messageSender, K.FStore.bodyField: messageBody]) { error in
+            if let error {
+                print(error.localizedDescription)
+            } else {
+                print("Successfully saved data")
+            }
         }
+
+        
     }
     
     @objc private func logOutButtonPressed() {
@@ -129,7 +173,7 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as? MessageCell else { fatalError() }
         
         let model = messages[indexPath.row]
-        cell.configure(with: model)
+        cell = mode
         
         return cell
     }
